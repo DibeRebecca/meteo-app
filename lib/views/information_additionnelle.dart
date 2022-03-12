@@ -8,7 +8,7 @@ Widget InformationAdditionnelle(
 String vent,String humidite,String atmosphere, String pression){
 
   return Container(
-    width: double.infinity,
+   // width: double.infinity,
     padding: EdgeInsets.all(18.0),
     child:Column(
       crossAxisAlignment:CrossAxisAlignment.center,
@@ -23,7 +23,7 @@ String vent,String humidite,String atmosphere, String pression){
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Vent",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0),
+                Text("Vent",style: titre,
                 ),
                 SizedBox(height: 18.0),
                 Text("Pression",style: titre,),
@@ -33,7 +33,7 @@ String vent,String humidite,String atmosphere, String pression){
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("$vent",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 18.0),
+                Text("$vent",style: info,
                 ),
                 SizedBox(height: 18.0),
                 Text("$pression",style: info,),
@@ -43,7 +43,7 @@ String vent,String humidite,String atmosphere, String pression){
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("humidite",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18.0),
+                Text("humidite",style: titre,
                 ),
                 SizedBox(height: 18.0),
                 Text("atmosphere",style: titre,),
@@ -53,7 +53,7 @@ String vent,String humidite,String atmosphere, String pression){
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("$humidite",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 18.0),
+                Text("$humidite",style: titre,
                 ),
                 SizedBox(height: 18.0),
                 Text("$atmosphere",style: info,),

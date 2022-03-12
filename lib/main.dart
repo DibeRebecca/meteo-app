@@ -39,7 +39,7 @@ class PageAccueil extends StatefulWidget {
 
 class _PageAccueilState extends State<PageAccueil> {
   int _currentPage = 0;
-  late String bgImg;
+  late String bgImg="";
   _onPageChanged(int index) {
     setState(() {
       _currentPage = index;
@@ -54,18 +54,18 @@ class _PageAccueilState extends State<PageAccueil> {
     client.getCurrentWeather("Georgia");
   }*/
   Future<void> getData() async{
-    data= await client.getCurrentWeather("France");
+    data= await client.getCurrentWeather("Ghana");
     if (data!.temp!>30){
-      bgImg = 'images/sunny.jpg';
+      bgImg = 'images/sunny.gif';
     }
     else if(data!.temp!>20){
-      bgImg = 'images/rainy.jpg';
+      bgImg = 'images/rainy.gif';
     }
     else if(data!.temp!>10){
-      bgImg = 'images/cloudy.jpeg';
+      bgImg = 'images/coudy.gif';
     }
     else{
-      bgImg = 'images/sunny.jpg';
+      bgImg = 'images/sunny.gif';
     }
   }
   @override
@@ -105,39 +105,41 @@ class _PageAccueilState extends State<PageAccueil> {
               children: [
                 Image.asset(
                   bgImg,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.fitHeight,
                   height: double.infinity,
                   width: double.infinity,
                 ),
-                Container(
+                /*Container(
                   decoration: BoxDecoration(color: Colors.black38),
-                ),
-                meteoCourant(Icons.wb_sunny_rounded, "${data!.temp}°C", "${data!.ville}"),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Text(
-                  "Informations additionnelles",
-                  style: TextStyle(fontSize: 24.0,color: Colors.white, fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Divider(),
-                SizedBox(
-                  height: 20.0,
-                ),
-                 Container(
-                  margin: EdgeInsets.only(top: 140, left: 15),
-                  child: Row(
+                ),*/
+                Container(
+                  padding: EdgeInsets.only(top: 120, left: 15),
+                  child:Column(
                     children: [
-                      for(int i = 0; i<5; i++)
-                        if( i == _currentPage )
-                          SliderDot(true)
-                        else
-                          SliderDot(false)
+                      Container(
+                        child: Row(
+                          children: [
+                            for(int i = 0; i<5; i++)
+                              if( i == _currentPage )
+                                SliderDot(true)
+                              else
+                                SliderDot(false)
+                          ],
+                        ),
+                      ),
+                      meteoCourant(double.parse(data!.temp.toString()), "${data!.ville}"),
+                      const Text(
+                        "Informations additionnelles",
+                        style: TextStyle(fontSize: 24.0,color: Colors.white, fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      InformationAdditionnelle("${data!.vent}", "${data!.humidite}", "${data!.pression}", "${data!.atmosphere}"),
+
                     ],
                   ),
                 ),
-                InformationAdditionnelle("${data!.vent}", "${data!.humidite}", "${data!.pression}", "${data!.atmosphere}"),
+
+                /**/
 
               ],
             )
