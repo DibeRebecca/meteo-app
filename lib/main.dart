@@ -98,6 +98,8 @@ class _PageAccueilState extends State<PageAccueil> {
       body: FutureBuilder(
         future: getData(),
         builder: ( context,snapshot){
+
+
           if(snapshot.connectionState == ConnectionState.done){
             return Container(
               child: Stack(
