@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import '../views/recherche_ville.dart';
 import 'package:app_meteo/model/meteo_model.dart';
 import 'package:app_meteo/services/meteo_api_client.dart';
 import 'package:app_meteo/views/information_additionnelle.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../widgets/slider_dot.dart';
+import '../views/villes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/recherche': (context) => const RechercheVille(),
+        '/villes': (context) => const Villes(),
+
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        //'/second': (context) => const SecondScreen(),
+      },
     );
   }
 }
@@ -80,26 +90,25 @@ class _PageAccueilState extends State<PageAccueil> {
         backgroundColor: Colors.transparent ,
         leading: IconButton(
             onPressed: (){},
-          icon:Icon(
-          Icons.search,size:30,color:Colors.white,
+          icon: const Icon(
+          Icons.search,
+            size:30,color:Colors.white,
       )
       ),
-        actions: [
-          Container(
-            //margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-            child: GestureDetector(
-              onTap:()=>print('menu clique'),
-              child:SvgPicture.asset('images/menu.svg', height:30, width:30, color:Colors.white
-            ),
+        actions:<Widget> [
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white,),
+            onPressed: (){
+              Navigator.pushNamed(context, '/recherche');
+              //Navigator.pop(context);
+            },
           )
-          )],
+          ],
         centerTitle: true,
       ),
       body: FutureBuilder(
         future: getData(),
         builder: ( context,snapshot){
-
-
           if(snapshot.connectionState == ConnectionState.done){
             return Container(
               child: Stack(
