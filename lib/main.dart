@@ -5,7 +5,6 @@ import 'package:app_meteo/model/meteo_model.dart';
 import 'package:app_meteo/services/meteo_api_client.dart';
 import 'package:app_meteo/views/information_additionnelle.dart';
 import 'package:app_meteo/views/meteo.courant.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_svg/svg.dart';
 import '../widgets/slider_dot.dart';
@@ -63,7 +62,7 @@ class _PageAccueilState extends State<PageAccueil> {
 
   MeteoApiClient client = MeteoApiClient();
   Meteo? data;
-  final List<String> selectedVilles = [] ;
+  final List<String> selectedVilles = [];
 
   List<String> getVille() {
     return selectedVilles;
@@ -147,7 +146,7 @@ class _PageAccueilState extends State<PageAccueil> {
                   decoration: BoxDecoration(color: Colors.black38),
                 ),*/
                   Container(
-                    padding: EdgeInsets.only(top: 120, left: 15),
+                    padding: EdgeInsets.only(top: 120, left: 15, right: 15),
                     child: Column(
                       children: [
                         Container(
@@ -156,7 +155,7 @@ class _PageAccueilState extends State<PageAccueil> {
                               Text(selectedVilles.toString()),
                               for (int i = 0; i < 5; i++)
                                 if (i == _currentPage)
-                                  SliderDot(true)
+                                  SliderDot(trugit e)
                                 else
                                   SliderDot(false)
                             ],
@@ -164,14 +163,6 @@ class _PageAccueilState extends State<PageAccueil> {
                         ),
                         meteoCourant(double.parse(data!.temp.toString()),
                             "${data!.ville}"),
-                        const Text(
-                          "Informations additionnelles",
-                          style: TextStyle(
-                            fontSize: 24.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                         InformationAdditionnelle(
                             "${data!.vent}",
                             "${data!.humidite}",
