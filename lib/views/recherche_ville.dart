@@ -5,7 +5,9 @@ import 'package:app_meteo/services/meteo_api_client.dart';
 import 'package:app_meteo/model/meteo_model.dart';
 
 class RechercheVille extends StatefulWidget {
-  const RechercheVille({Key? key}) : super(key: key);
+  final List<String> selectedVilles;
+  const RechercheVille({Key? key, required this.selectedVilles}) : super(key: key);
+
 
   @override
   _RechercheVilleState createState() => _RechercheVilleState();
@@ -14,19 +16,25 @@ class RechercheVille extends StatefulWidget {
 class _RechercheVilleState extends State<RechercheVille> {
   //TextEditingController controller=new TextEditingController();
 
-
 MeteoApiClient client=MeteoApiClient();
 
   String dropdownValue = 'Lomé';
   List<String> villes=['Ghana', 'Kpalimé', 'Sokodé', 'Kara','Lomé',
-  'Bassar', 'Accra', 'Yaounde', 'Niamey','Niamtougou', 'Paris', 'Nice', 'Coyonou'
-  ,'Yamoussoukro', 'Brussels', 'London', 'Singapore','Bordeau', 'Nantes', 'Nantes', 'United States of America'];
+  'Bassar', 'Accra', 'Yaounde', 'Niamey','Niamtougou', 'Paris', 'Nice', 'Cotonou'
+  ,'Yamoussoukro', 'Brussels', 'London', 'Singapore','Bordeau', 'Nantes','Luxembourg', 'United States of America'];
 
-  List<String> selectedVilles = [];
+  
+
+  List<String> selectedVilles =[];
+
+
 
   @override
    build(BuildContext context) {
+    selectedVilles = [];
+
     return Scaffold(
+
       //extendBodyBehindAppBar: true ,
       appBar: AppBar(
         elevation:0.2,
@@ -41,8 +49,7 @@ MeteoApiClient client=MeteoApiClient();
         ),
 
       ),
-      body: SingleChildScrollView(
-        child: Padding(
+      body:SingleChildScrollView ( child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start ,
@@ -81,26 +88,26 @@ MeteoApiClient client=MeteoApiClient();
                       );
                     }).toList(),
                   ),
+
                   ElevatedButton(onPressed: (){
                     selectedVilles.contains(dropdownValue) ?
-                    selectedVilles :
-                    setState(() {
+                         setState(() {
                       selectedVilles.add(dropdownValue) ;
-                    });
+                      print( selectedVilles.toString());
+                    }): selectedVilles;
+
+
                   }, child: Icon(Icons.add))
                 ]
 
             ),
           ),
-
-
               for (String name in selectedVilles)
-              CardWidget(name, client)
-
+                    CardWidget(name, client)
             ],
           ),
-        ),
-      )
+
+      )),
     );
   }
 }

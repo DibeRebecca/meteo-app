@@ -5,6 +5,7 @@ import 'package:app_meteo/model/meteo_model.dart';
 
 
 Widget CardWidget(String ville,MeteoApiClient client){
+
   return Card(
     color: Colors.amber ,
 
@@ -12,7 +13,9 @@ Widget CardWidget(String ville,MeteoApiClient client){
         future:client.getCurrentWeather(ville),
       builder: ( context,snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return Container(width: double.infinity, height: 100,
+          return Container(
+            width: double.infinity, 
+            height: 100,
             margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -21,14 +24,14 @@ Widget CardWidget(String ville,MeteoApiClient client){
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("$ville", style: TextStyle(fontSize: 16)),
-                        SizedBox(height: 10.0,), Text(snapshot.data!.humidite.toString())]),
-                  Text("", style: TextStyle(fontSize: 36),)
+                        Text(ville, style: const TextStyle(fontSize: 16)),
+                        const SizedBox(height: 10.0,), Text(snapshot.data!.humidite.toString())]),
+                  const Text("", style: TextStyle(fontSize: 36),)
                 ]
             ),
           );
         } else{
-          return SizedBox();
+          return const SizedBox();
         }
       }
   ),
