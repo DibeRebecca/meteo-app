@@ -1,67 +1,84 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'dart:ui' as ui;
 
-TextStyle titre = const TextStyle (fontWeight:FontWeight.w600,fontSize:18.0,color: Color(0xffffffff));
-TextStyle info = const TextStyle (fontWeight:FontWeight.w400,fontSize:18.0,color: Color(0xffffffff));
+TextStyle titre = const TextStyle (fontWeight:FontWeight.w400,fontSize:10.0,color: Color(0xffffffff));
+TextStyle info = const TextStyle (fontWeight:FontWeight.w600,fontSize:18.0,color: Color(0xffffffff));
 
 Widget InformationAdditionnelle(
 String vent,String humidite,String atmosphere, String pression){
-
-  return Container(
-   // width: double.infinity,
-    padding: EdgeInsets.all(18.0),
-    child:Column(
-      crossAxisAlignment:CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(15),
+    child: BackdropFilter(
+      filter: ui.ImageFilter.blur(
+        sigmaX: 5.0,
+        sigmaY: 5.0,
+      ),
+      child: Container(
+        color: Colors.white.withOpacity(0.2),
+       // width: double.infinity,
+        padding: EdgeInsets.all(18.0),
+        child: Column(
+          crossAxisAlignment:CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Center(
+              child: Text('Informations personnelles', style: titre,),
+            ),
+            const SizedBox(height: 8,),
+            Divider(color: Colors.white,),
+            const SizedBox(height: 12,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Vent",style: titre,
+                Column(
+                  crossAxisAlignment:CrossAxisAlignment.start,
+                  children: [
+                    Text('Vent', style: titre,),
+                    const SizedBox(height: 5,),
+                    Text("$vent",style: info,
+                    ),
+                  ],
                 ),
-                SizedBox(height: 18.0),
-                Text("Pression",style: titre,),
+                Column(
+                  crossAxisAlignment:CrossAxisAlignment.start,
+                  children: [
+                    Text('Pression', style: titre,),
+                    const SizedBox(height: 5,),
+                    Text(pression,style: info,
+                    ),
+                  ],
+                ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            const SizedBox(height: 22,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("$vent",style: info,
+                Column(
+                  crossAxisAlignment:CrossAxisAlignment.start,
+                  children: [
+                    Text('Pression', style: titre,),
+                    const SizedBox(height: 5,),
+                    Text(pression,style: info,
+                    ),
+                  ],
                 ),
-                SizedBox(height: 18.0),
-                Text("$pression",style: info,),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("humidite",style: titre,
+                Column(
+                  crossAxisAlignment:CrossAxisAlignment.start,
+                  children: [
+                    Text('Humidité', style: titre,),
+                    const SizedBox(height: 5,),
+                    Text(humidite,style: info,
+                    ),
+                  ],
                 ),
-                SizedBox(height: 18.0),
-                Text("atmosphere",style: titre,),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text("$humidite",style: titre,
-                ),
-                SizedBox(height: 18.0),
-                Text("$atmosphere",style: info,),
               ],
             ),
           ],
         )
-      ],
-    )
+      ),
+    ),
   );
 }

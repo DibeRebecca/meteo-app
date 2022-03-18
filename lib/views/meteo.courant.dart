@@ -59,12 +59,27 @@ Widget meteoCourant( double temp, String location){
           const SizedBox(
             height: 10.0,
           ),
-          Text("$temp °C",
-            style: const TextStyle(
-              fontSize: 66.0,
-              color: Colors.white,
-            ),
-
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("$temp",
+                style: const TextStyle(
+                  fontSize: 90.0,
+                  color: Colors.white,
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(top: 20),
+                child: const Text("°C",
+                  style: TextStyle(
+                    fontSize: 23.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
          const SizedBox(
               height: 10.0),
