@@ -4,42 +4,47 @@ import 'package:app_meteo/services/meteo_api_client.dart';
 import 'package:app_meteo/model/meteo_model.dart';
 
 
-Widget CardWidget(String ville,MeteoApiClient client){
-
+TextStyle titre = const TextStyle(
+    fontWeight: FontWeight.w400, fontSize: 20.0, color: Color(0xffffffff));
+TextStyle info = const TextStyle(
+    fontWeight: FontWeight.w600, fontSize: 25.0, color: Color(0xffffffff));
+Widget CardWidget(String ville, MeteoApiClient client) {
   return Card(
-    color: Colors.amber ,
+    color: Colors.blue,
+    elevation: 5.0,
+    child: Container(
+      width: double.infinity,
+      height: 100,
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      child: FutureBuilder<Meteo>(
+          future: client.getCurrentWeather(ville),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Row(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
 
-    child:FutureBuilder<Meteo>(
-        future:client.getCurrentWeather(ville),
-      builder: ( context,snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Container(
-            width: double.infinity, 
-            height: 100,
-            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(ville, style: const TextStyle(fontSize: 16)),
-                        const SizedBox(height: 10.0,), Text(snapshot.data!.humidite.toString())]),
-                  const Text("", style: TextStyle(fontSize: 36),)
-                ]
-            ),
-          );
-        } else{
-          return const SizedBox();
-        }
-      }
-  ),
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children:<Widget> [
+                          Text(ville, style: info),
+                          SizedBox(width: 80),
+                          Text(snapshot.data!.temp.toString()+" °C", style: titre,),
+                        ]
+                    ),
+                    const Text(
+                      "",
+                      style: TextStyle(fontSize: 36),
+                    )
+                  ]);
+            } else {
+              return SizedBox();
+            }
+          }),
+    ),
     shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(25.0),
-  ),
-
+      borderRadius: BorderRadius.circular(20.0),
+    ),
   );
 }
-
-
