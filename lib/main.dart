@@ -1,7 +1,7 @@
 //import 'dart:convert';
 import 'dart:ui';
 import 'package:app_meteo/widgets/informations_avances.dart';
-
+import 'package:flutter_launcher_icons/main.dart';
 import '../views/recherche_ville.dart';
 import 'package:app_meteo/model/meteo_model.dart';
 import 'package:app_meteo/services/meteo_api_client.dart';
